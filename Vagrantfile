@@ -70,13 +70,23 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
  
-Vagrant::Config.run do |config|
+#Vagrant::Config.run do |config|
 
   # Enable the Puppet provisioner
-     config.vm.provision :puppet
-     end
-config.vm.provision "puppet" do |puppet|
-    puppet.module_path = "modules"
-  end
-
+config.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "/home/sarithf/vagrant/manifests"
+  #      puppet.manifest_file  = "/home/sarithf/vagrant/manifests/site.pp"
+        puppet.module_path = "/home/sarithf/vagrant/modules"
+        puppet.options = "--verbose --debug"
 end
+#config.vm.provision :shell do |shell|
+#  shell.inline =" puppet module install puppetlabs/nodejs;
+#                  puppet module install puppetlabs/apache"
+end
+
+
+#config.vm.provision "puppet" do |puppet|
+#    puppet.module_path = "/home/sarithf/.puppet/modules"
+#  end
+
+#end
